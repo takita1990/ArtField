@@ -31,7 +31,11 @@ https://docs.google.com/spreadsheets/d/1_OjZwULaIkFQH1DFCil-tEc-MyZ7Y_0SEQBvIRI8
 #開発環境
 
 •	OS：macOS Catalina
+
 •	言語：HTML,CSS,JavaScript,Ruby
+
 •	フレームワーク：Ruby on Rails
+
 •	JSライブラリ：jQuery
+
 •	仮想環境：Vagrant,VirtualBox
