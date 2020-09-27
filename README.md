@@ -1,24 +1,29 @@
-# README
+アプリ名
+ArtField
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+サイト概要
+個人製作した作品を拡散できるサイト
 
-Things you may want to cover:
+サイトテーマ
+芸術と人を繋ぐ
 
-* Ruby version
+テーマを選んだ理由
+身近に個人で美術品を製作してる方がいて、芸術に特化した個人で作った作品を広める事ができるアプリがあればいいなと感じた。
 
-* System dependencies
+ターゲットユーザ
+芸術分野を専攻してる学生、個人製作してる人
 
-* Configuration
+主な利用シーン
+自分の製作物をたくさんの方に見てもらい時。
 
-* Database creation
+設計書
 
-* Database initialization
+機能一覧
+https://docs.google.com/spreadsheets/d/1_OjZwULaIkFQH1DFCil-tEc-MyZ7Y_0SEQBvIRI8mq4/edit#gid=0
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+開発環境
+	•	OS：macOS Catalina
+	•	言語：HTML,CSS,JavaScript,Ruby
+	•	フレームワーク：Ruby on Rails
+	•	JSライブラリ：jQuery
+	•	仮想環境：Vagrant,VirtualBox
