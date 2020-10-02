@@ -14,12 +14,60 @@
   </head>
 
   <body>
+    <body>
+<header class="navbar-default">
+        <div class = "container" >
+            <div class = "row">
+                <div class = "col-xl-6">
+                    <div class = "title">
+                        <ul class="nav navbar-nav navbar-life">
+                          <li class="logo"><a href="/"><i class="fab fa-slack"></i> ArtField</a></li>
+                            <% if member_signed_in? %>
+                              <li class="current-member-name">ようこそ、<%= current_member.name %>さん
+                            <% end %></li>
+                        </ul>
+                    </div>
+                </div>
+
+              <div class = "col-xl-6">
+              <% if member_signed_in? %>
+                <nav class="nav1 member-after-login navbar-custom">
+                      <ul class="nav navbar-nav navbar-right">
+                        <li><%= link_to 'マイページ', member_path(current_member) %></li>
+                        <li><%= link_to '作品一覧', root_path %></li>
+                        <li><%= link_to 'ログアウト', destroy_member_session_path, method: :delete  %></li>
+                      </ul>
+                </nav>
+                <% elsif admin_user_signed_in? %>
+                <nav class="nav1 member-after-login navbar-custom">
+                      <ul class="nav navbar-nav navbar-right">
+                        <li><%= link_to '管理者ホーム', admin_dashboard_path %></li>
+                        <li><%= link_to 'ジャンル一覧', admin_genres_path %></li>
+                        <li><%= link_to '登録者一覧', root_path %></li>
+                      </ul>
+                </nav>
+              <% else %>
+                <nav class="nav1 member-before-login navbar-custom">
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><%= link_to 'About', works_about_path %></li>
+                    <li><%= link_to '作品一覧', root_path %></li>
+                    <li><%= link_to '新規登録', new_member_registration_path %></li>
+                    <li><%= link_to 'ログイン', new_member_session_path %></li>
+                  </ul>
+                </nav>
+              <% end %>
+              </div>
+            </div>
+        </div>
+</header>
+
+<div class="main">
+  <div class='container'>
     <%= yield %>
-    <% if member_signed_in? %>
-    <%= current_member.name %><br>
-    <%= link_to'logout',destroy_member_session_path, method: :delete %>
-    <% else %>
-    <%= link_to 'ログイン', new_member_session_path %>
-    <% end %>
+  </div>
+</div>
+
+    <footer>
+</footer>
   </body>
 </html>

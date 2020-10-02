@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'members/edit'
+  get 'members/show'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :members
@@ -11,5 +13,6 @@ Rails.application.routes.draw do
   end
 
   resources :works
+  resources :members
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
