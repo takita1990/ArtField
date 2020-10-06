@@ -1,3 +1,22 @@
 // Place all the styles related to the works controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.box-list{
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+  flex-wrap: wrap;
+  flex-direction:row;
+  align-content:stretch;
+  width: 100%;
+
+}
+.box-list li{
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  text-align:  center;
+}

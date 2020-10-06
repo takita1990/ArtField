@@ -1,0 +1,20 @@
+   <h2>出展作品一覧</h2>
+
+    <h3>
+      <% if member_signed_in? %>
+      <%= link_to " 商品新規登録画面 ", new_member_work_path(current_member.id), class: "glyphicon glyphicon-plus-sign" %>
+      <% end %>
+    </h3>
+
+    <ul class="box-list"><% @works.each do |work| %>
+      <% if work.image.present? %>
+      <li>
+        <% work.image.find(1).each do |img| %>
+        <div class="image"><%= image_tag(img.url) %></div>
+        <% end %>
+        <% end %>
+        <div class = "work_name"><%= link_to work.name, member_work_path(work.member_id,work.id) %></div>
+        <p><%= work.genre.name %><p>
+        </li>
+        <% end %>
+    </ul>

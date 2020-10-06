@@ -1,0 +1,28 @@
+  <div class="row">
+     <div class = "col-xs-6">
+    <h3><%= @member.name %>さんの会員詳細</h3>
+    <table class="table">
+        <tr>
+          <th>メンバーID</th>
+          <td><%= @member.id %></td>
+        </tr>
+        <tr>
+          <th>氏名</th>
+          <td><%= @member.name %></td>
+        <tr>
+          <th>メールアドレス</th>
+          <td><%= @member.email %></td>
+        </tr>
+        <tr>
+          <th>会員ステータス</th>
+            <% if @member.is_withdeawal_status == false %>
+              <td class="bg-danger">退会会員</td>
+                <% else %>
+              <td class="bg-primary ">有効会員</td>
+                <% end %>
+        </tr>
+    </table>
+
+      <btn><%= link_to "編集する",edit_admin_member_path(@member.id), class: "btn btn-primary" %></btn>
+  </div>
+</div>

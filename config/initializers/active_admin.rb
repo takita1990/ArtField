@@ -247,6 +247,7 @@ ActiveAdmin.setup do |config|
      config.namespace :admin do |admin|
        admin.build_menu :default do |menu|
          menu.add label: "genres", url: :admin_genres_path, html_options: { target: :blank }
+         menu.add label: "members", url: :admin_members_path, html_options: { target: :blank }
        end
      end
 

@@ -34,7 +34,8 @@
                 <nav class="nav1 member-after-login navbar-custom">
                       <ul class="nav navbar-nav navbar-right">
                         <li><%= link_to 'マイページ', member_path(current_member) %></li>
-                        <li><%= link_to '作品一覧', root_path %></li>
+                        <li><%= link_to '作品一覧', works_path %></li>
+                        <li><%= link_to '新規投稿', new_member_work_path(current_member) %></li>
                         <li><%= link_to 'ログアウト', destroy_member_session_path, method: :delete  %></li>
                       </ul>
                 </nav>
@@ -50,7 +51,7 @@
                 <nav class="nav1 member-before-login navbar-custom">
                   <ul class="nav navbar-nav navbar-right">
                     <li><%= link_to 'About', works_about_path %></li>
-                    <li><%= link_to '作品一覧', root_path %></li>
+                    <li><%= link_to '作品一覧', works_path %></li>
                     <li><%= link_to '新規登録', new_member_registration_path %></li>
                     <li><%= link_to 'ログイン', new_member_session_path %></li>
                   </ul>

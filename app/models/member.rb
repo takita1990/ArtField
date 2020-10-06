@@ -5,5 +5,6 @@ class Member < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :works, dependent: :destroy
+  has_many :favorites
   attachment :profile_image
 end

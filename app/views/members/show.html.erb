@@ -4,6 +4,7 @@
 
      <font size= "4" >登録情報 </font>
      <%= link_to "編集する", edit_member_path(@member), class: "btn btn-primary"%>
+     <%= link_to "出展作品", member_works_path(@member), class: "btn btn-success"%>
   </div>
 </div>
 
@@ -11,7 +12,7 @@
  <div class="col-xs-2">
       <table class="table table-bordered ">
         <tr>
-        	 <%= attachment_image_tag @member, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+        	 <%= attachment_image_tag @member, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
           <th class="active">氏名</th>
           <td><%= @member.name %></td>
         </tr>
