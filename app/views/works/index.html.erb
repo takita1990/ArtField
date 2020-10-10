@@ -1,29 +1,55 @@
     <h2>作品一覧</h2>
 
+        <% @genres.each do |genre| %>
+      <% if genre.valid_status == true %>
+        <tr>
+          <td><%= link_to genre.name, works_path(genre_id: genre.id)%></td>
+        </tr>
+      <% end %>
+    <% end %>
+      <tr>
+        <td><%= link_to "すべての商品を見る", works_path, class: 'dark-blue-letter' %></td>
+      </tr>
+
     <h3>
     	<% if member_signed_in? %>
     	<%= link_to " 商品新規登録画面 ", new_member_work_path(current_member.id), class: "glyphicon glyphicon-plus-sign" %>
     	<% end %>
     </h3>
 
-    <ul class="box-list"><% @works.each do |work| %>
-    	<% if work.image.present? %>
-    	<li>
-    		<% work.image.find(1).each do |img| %>
-    		<div class="image"><%= image_tag(img.url) %></div>
-    		<% end %>
-    		<% end %>
-    		<div class = "work_name"><%= link_to work.name, member_work_path(work.member_id,work.id) %></div>
-    		<p><%= work.genre.name %><p>
-                <% if member_signed_in? %>
-                <% if work.favorite_by?(current_member) %> <!-- ログインしているユーザーがファボしたかどうかで分岐 -->
-                    <p><span>お気に入り解除: </span><%=link_to work.favorites.count, work_favorites_path(work.id), method: :delete %></p>
-                <% else %>
-                    <p><span>お気に入り登録: </span><%=link_to work.favorites.count, work_favorites_path(work.id), method: :post %></p>
-                <% end %>
-              <% else %>
-                <p><span>お気に入り数: </span><%= work.favorites.count %></p>
-              <% end %>
-    		</li>
-    		<% end %>
-    </ul>
+<ul class="box-list">
+   <% if @search_genre.present? %>
+      <% @search_genre.first.works.each do |work| %>
+           <li>
+               <% if work.image.present? %>
+                     <div class="image"><%= image_tag(work.image[0].url) %></div>
+               <% end %>
+               <div class = "work_name">作品名：<%= link_to work.name, work_path(work.id) %></div>
+               <div class = "member_name">出展者：<%= link_to work.member.name, member_path(work.member_id) %></div>
+               <div class="inline-meta">
+                   <%= link_to work.post_comments.count, work_path(work.id), class:"fa fa-comment"  %>
+                   <span id="favorites_buttons_<%= work.id %>">
+                       <%= render partial: 'favorites/favorite', locals: { work: work} %>
+                   </span>
+               </div>
+
+           </li>
+      <% end %>
+   <% else %>
+      <% @works.each do |work| %>
+            <li>
+               <% if work.image.present? %>
+                     <div class="image"><%= image_tag(work.image.first.url) %></div>
+               <% end %>
+                   <div class = "work_name">作品名：<%= link_to work.name, work_path(work.id) %></div>
+                   <div class = "member_name">出展者：<%= link_to work.member.name, member_path(work.member_id) %></div>
+                   <div class="inline-meta">
+                       <%= link_to work.post_comments.count, work_path(work.id), class:"fa fa-comment"  %>
+                        <span id="favorites_buttons_<%= work.id %>">
+                           <%= render partial: 'favorites/favorite', locals: { work: work} %>
+                        </span>
+                   </div>
+            </li>
+      <% end %>
+   <% end %>
+</ul>

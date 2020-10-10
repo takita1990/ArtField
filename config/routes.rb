@@ -13,11 +13,15 @@ Rails.application.routes.draw do
     resources :members, only: [:index,:show,:edit,:update]
   end
 
-    resources :works, only: [:index] do
+    resources :works, only: [:index, :show] do
+      resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
 
     resources :members do
+      resource :relationships, only: [:create, :destroy]
+      get :follows, on: :member
+      get :followers, on: :member
       scope module: :member do
         resources :works do
           resource :favorites, only: [:create, :destroy]

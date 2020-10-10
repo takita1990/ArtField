@@ -1,6 +1,7 @@
 class MembersController < ApplicationController
+  before_action :authenticate_member!
   def show
-  	@member = current_member
+  	@member = Member.find(params[:id])
   end
 
   def edit
@@ -14,6 +15,16 @@ class MembersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def follows
+    member = Member.find(params[:id])
+    @followings_member = member.followings
+  end
+
+  def followers
+    member = Member.find(params[:id])
+    @followers_member = member.followers
   end
 
   private

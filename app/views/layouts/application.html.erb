@@ -35,6 +35,7 @@
                       <ul class="nav navbar-nav navbar-right">
                         <li><%= link_to 'マイページ', member_path(current_member) %></li>
                         <li><%= link_to '作品一覧', works_path %></li>
+                        <li><%= link_to 'いいね作品一覧', member_work_path(id: current_member.id,member_id: current_member.id)%></li>
                         <li><%= link_to '新規投稿', new_member_work_path(current_member) %></li>
                         <li><%= link_to 'ログアウト', destroy_member_session_path, method: :delete  %></li>
                       </ul>

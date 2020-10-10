@@ -1,0 +1,27 @@
+<% if @followers_member.count == 0 %>
+		<h1>フォローされていません。</h1>
+	<% else %>
+	<h3>フォロワー一覧</h3>
+	<table class="table table-hover">
+	        <thead>
+	          <tr>
+	            <th></th>
+	            <th>氏名</th>
+	            <th>フォロー数</th>
+	            <th>フォロワー数</th>
+	          </tr>
+	        </thead>
+		<% @followers_member.each do |member| %>
+		  <tr>
+		  <td><%= attachment_image_tag member, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %></td>
+          <td><%= link_to member.name, member_path(member.id) %></td>
+          <td><%= member.followings.count %></td>
+          <td><%= member.followers.count %></td>
+
+            <div id = "relationships_buttons_<%= member.id%>">
+                <%= render partial: "relationships/relationship", locals: {work: member} %>
+            </div>
+		</tr>
+		<% end %>
+	<% end %>
+

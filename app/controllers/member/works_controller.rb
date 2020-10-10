@@ -1,5 +1,5 @@
 class Member::WorksController < ApplicationController
-  before_action :authenticate_member!,except: [:top, :about, :show]
+  before_action :authenticate_member!,except: [:top, :about]
 
   def top
   end
@@ -12,7 +12,8 @@ class Member::WorksController < ApplicationController
   end
 
   def show
-    @work = Work.find(params[:id])
+    @member = current_member
+    @favorite_works = @member.favorite_works
   end
 
   def create
@@ -45,9 +46,9 @@ class Member::WorksController < ApplicationController
   end
 
   def destroy
-  @work = Work.find(params[:id])
+  @work = Work.find(params[:member_id])
   @work.destroy
-  redirect_to member_works_path
+  redirect_to member_works_path(current_member)
   end
 
 
