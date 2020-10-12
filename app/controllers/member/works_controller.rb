@@ -28,7 +28,7 @@ class Member::WorksController < ApplicationController
 
   def index
     @member = Member.find(params[:member_id])
-    @works = @member.works.page(params[:page])
+    @works = @member.works
     #byebug
   end
 
@@ -46,7 +46,7 @@ class Member::WorksController < ApplicationController
   end
 
   def destroy
-  @work = Work.find(params[:member_id])
+  @work = Work.find(params[:id])
   @work.destroy
   redirect_to member_works_path(current_member)
   end

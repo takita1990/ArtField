@@ -20,16 +20,14 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "slick-theme";
+@import "slick";
 
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
-
-//a {
-  //text-decoration: none;
-//}
 
 .clearfix::after {
   content: "";
@@ -47,9 +45,7 @@ header {
 	padding-top: 15px;
 	font-size: 30px;
 }
-.cake {
-	color: #bc8f8f;
-}
+
 nav ul li {
 	padding: 20px 0px 20px 0px;
 	color: #fff;
@@ -75,7 +71,10 @@ footer {
 	background-color: #FFFFFF;
 	border-bottom: #FF7B00;
 }
+
 .current-member-name {
 	color: #fff;
 	padding: 40px 0 0 250px;
 }
+
+

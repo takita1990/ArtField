@@ -1,35 +1,27 @@
-   <h2><%= @member.name %>さんの作品一覧</h2>
+<h2><%= @member.name %>さんの作品一覧</h2>
 
-    <h3>
-      <% if member_signed_in? %>
-      <%= link_to " 商品新規登録画面 ", new_member_work_path(current_member.id), class: "glyphicon glyphicon-plus-sign" %>
-      <% end %>
-    </h3>
+ <h3>
+   <% if member_signed_in? %>
+     <%= link_to " 商品新規登録画面 ", new_member_work_path(current_member.id), class: "glyphicon glyphicon-plus-sign" %>
+   <% end %>
+ </h3>
 
-    <ul class="box-list">
-            <% @works.each do |work| %>
-            <% if work.image.present? %>
-        <li>
+<ul class="box-list">
+   <% @works.each do |work| %>
+      <li>
+         <% if work.image.present? %>
               <% work.image.find(1).each do |img| %>
-              <div class="image"><%= image_tag(img.url) %></div>
+                  <div class="image"><%= image_tag(img.url) %></div>
               <% end %>
-              <% end %>
-              <div class = "work_name">作品名：<%= link_to work.name, work_path(work.id) %></div>
-              <div class = "member_name">出展者：<%= link_to work.member.name, member_path(work.member_id) %></div>
-              <div id="favorites_buttons_<%= work.id %>">
-                <%= render partial: 'favorites/favorite', locals: { work: work} %>
-            　</div>
-
-            <% if member_signed_in? %>
-                <% if current_member != work.member %>
-                    <% if work.member.followed_by?(current_member) %>
-                        <p><%=link_to "フォロー済み", member_relationships_path(work.member.id), method: :delete,class: "btn btn-primary" %></p>
-                    <% else %>
-                        <p><%=link_to "フォローする", member_relationships_path(work.member.id), method: :post,class: "btn btn-danger" %></p>
-                    <% end %>
-                <% end %>
-            <% end %>
-
-        </li>
-            <% end %>
-    </ul>
+         <% end %>
+            <div class = "work_name">作品名：<%= link_to work.name, work_path(work.id) %></div>
+            <div class = "member_name">出展者：<%= link_to work.member.name, member_path(work.member_id) %></div>
+            <div class="inline-meta">
+                <%= link_to work.post_comments.count, work_path(work.id), class:"fa fa-comment"  %>
+                <span id="favorites_buttons_<%= work.id %>">
+                    <%= render partial: 'favorites/favorite', locals: { work: work} %>
+                </span>
+            </div>
+      </li>
+   <% end %>
+</ul>

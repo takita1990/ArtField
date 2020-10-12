@@ -1,4 +1,5 @@
 class RelationshipsController < ApplicationController
+  before_action :authenticate_member!
  def create
  	@member = Member.find(params[:member_id])
     follow = current_member.active_relationships.build(follower_id: params[:member_id])

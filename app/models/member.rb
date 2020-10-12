@@ -5,8 +5,9 @@ class Member < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :works, dependent: :destroy
-  has_many :favorites, foreign_key: 'member_id'
+  has_many :favorites, foreign_key: 'member_id',dependent: :destroy
   has_many :favorite_works, through: :favorites, source: :work
+  has_many :post_comments, dependent: :destroy
   attachment :profile_image
 
    # ====================自分がフォローしているユーザーとの関連 ===================================

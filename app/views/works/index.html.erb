@@ -1,55 +1,58 @@
-    <h2>作品一覧</h2>
+<h2>作品一覧</h2>
 
-        <% @genres.each do |genre| %>
+<h4 class = genre-search>ジャンル検索</h4>
+  <ul class="genre-list">
+
+      <% @genres.each do |genre| %>
       <% if genre.valid_status == true %>
-        <tr>
-          <td><%= link_to genre.name, works_path(genre_id: genre.id)%></td>
-        </tr>
+          <li><%= link_to genre.name, works_path(genre_id: genre.id)%></li>
       <% end %>
     <% end %>
-      <tr>
-        <td><%= link_to "すべての商品を見る", works_path, class: 'dark-blue-letter' %></td>
-      </tr>
+  </ul>
 
-    <h3>
-    	<% if member_signed_in? %>
-    	<%= link_to " 商品新規登録画面 ", new_member_work_path(current_member.id), class: "glyphicon glyphicon-plus-sign" %>
-    	<% end %>
-    </h3>
+    <tr>
+      <td><%= link_to "すべての商品を見る", works_path, class: 'dark-blue-letter' %></td>
+    </tr>
 
-<ul class="box-list">
-   <% if @search_genre.present? %>
-      <% @search_genre.first.works.each do |work| %>
-           <li>
-               <% if work.image.present? %>
-                     <div class="image"><%= image_tag(work.image[0].url) %></div>
-               <% end %>
-               <div class = "work_name">作品名：<%= link_to work.name, work_path(work.id) %></div>
-               <div class = "member_name">出展者：<%= link_to work.member.name, member_path(work.member_id) %></div>
-               <div class="inline-meta">
-                   <%= link_to work.post_comments.count, work_path(work.id), class:"fa fa-comment"  %>
-                   <span id="favorites_buttons_<%= work.id %>">
-                       <%= render partial: 'favorites/favorite', locals: { work: work} %>
-                   </span>
-               </div>
+<h3>
+	<% if member_signed_in? %>
+	 <%= link_to " 商品新規登録画面 ", new_member_work_path(current_member.id), class: "glyphicon glyphicon-plus-sign" %>
+	<% end %>
+</h3>
 
-           </li>
-      <% end %>
-   <% else %>
-      <% @works.each do |work| %>
-            <li>
-               <% if work.image.present? %>
-                     <div class="image"><%= image_tag(work.image.first.url) %></div>
-               <% end %>
-                   <div class = "work_name">作品名：<%= link_to work.name, work_path(work.id) %></div>
-                   <div class = "member_name">出展者：<%= link_to work.member.name, member_path(work.member_id) %></div>
-                   <div class="inline-meta">
-                       <%= link_to work.post_comments.count, work_path(work.id), class:"fa fa-comment"  %>
-                        <span id="favorites_buttons_<%= work.id %>">
-                           <%= render partial: 'favorites/favorite', locals: { work: work} %>
-                        </span>
-                   </div>
-            </li>
-      <% end %>
-   <% end %>
-</ul>
+  <ul class="box-list">
+     <% if @search_genre.present? %>
+        <% @search_genre.first.works.each do |work| %>
+             <li>
+                 <% if work.image.present? %>
+                       <div class="image"><%= image_tag(work.image[0].url) %></div>
+                 <% end %>
+                 <div class = "work_name">作品名：<%= link_to work.name, work_path(work.id) %></div>
+                 <div class = "member_name">出展者：<%= link_to work.member.name, member_path(work.member_id) %></div>
+                 <div class="inline-meta">
+                     <%= link_to work.post_comments.count, work_path(work.id), class:"fa fa-comment"  %>
+                     <span id="favorites_buttons_<%= work.id %>">
+                         <%= render partial: 'favorites/favorite', locals: { work: work} %>
+                     </span>
+                 </div>
+
+             </li>
+        <% end %>
+     <% else %>
+        <% @works.each do |work| %>
+              <li>
+                 <% if work.image.present? %>
+                       <div class="image"><%= image_tag(work.image.first.url) %></div>
+                 <% end %>
+                     <div class = "work_name">作品名：<%= link_to work.name, work_path(work.id) %></div>
+                     <div class = "member_name">出展者：<%= link_to work.member.name, member_path(work.member_id) %></div>
+                     <div class="inline-meta">
+                     <%= link_to work.post_comments.count, work_path(work.id), class:"fa fa-comment"  %>
+                     <span id="favorites_buttons_<%= work.id %>">
+                         <%= render partial: 'favorites/favorite', locals: { work: work} %>
+                     </span>
+                </div>
+              </li>
+        <% end %>
+     <% end %>
+  </ul>

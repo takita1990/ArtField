@@ -5,71 +5,69 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat+Subrayada" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="slick.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <body>
-<header class="navbar-default">
-        <div class = "container" >
-            <div class = "row">
-                <div class = "col-xl-6">
-                    <div class = "title">
-                        <ul class="nav navbar-nav navbar-life">
-                          <li class="logo"><a href="/"><i class="fab fa-slack"></i> ArtField</a></li>
-                            <% if member_signed_in? %>
-                              <li class="current-member-name">ようこそ、<%= current_member.name %>さん
-                            <% end %></li>
-                        </ul>
+    <header class="navbar-default">
+            <div class = "container" >
+                <div class = "row">
+                    <div class = "col-xl-6">
+                        <div class = "title">
+                            <ul class="nav navbar-nav navbar-life">
+                              <li class="logo"><a href="/">ArtField</a></li>
+                                <% if member_signed_in? %>
+                                  <li class="current-member-name">ようこそ、<%= current_member.name %>さん
+                                <% end %></li>
+                            </ul>
+                        </div>
                     </div>
+
+                  <div class = "col-xl-6">
+                      <% if member_signed_in? %>
+                        <nav class="nav1 member-after-login navbar-custom">
+                              <ul class="nav navbar-nav navbar-right">
+                                <li><%= link_to 'マイページ', member_path(current_member) %></li>
+                                <li><%= link_to '作品一覧', works_path %></li>
+                                <li><%= link_to 'いいね作品一覧', member_work_path(id: current_member.id,member_id: current_member.id)%></li>
+                                <li><%= link_to '新規投稿', new_member_work_path(current_member) %></li>
+                                <li><%= link_to 'ログアウト', destroy_member_session_path, method: :delete  %></li>
+                              </ul>
+                        </nav>
+                      <% elsif admin_user_signed_in? %>
+                        <nav class="nav1 member-after-login navbar-custom">
+                              <ul class="nav navbar-nav navbar-right">
+                                <li><%= link_to '管理者ホーム', admin_dashboard_path %></li>
+                                <li><%= link_to 'ジャンル一覧', admin_genres_path %></li>
+                                <li><%= link_to '登録者一覧', admin_members_path %></li>
+                              </ul>
+                        </nav>
+                      <% else %>
+                        <nav class="nav1 member-before-login navbar-custom">
+                              <ul class="nav navbar-nav navbar-right">
+                                <li><a href="/#sec01">About</a></li>
+                                <li><%= link_to '作品一覧', works_path %></li>
+                                <li><%= link_to '新規登録', new_member_registration_path %></li>
+                                <li><%= link_to 'ログイン', new_member_session_path %></li>
+                              </ul>
+                        </nav>
+                      <% end %>
+                  </div>
                 </div>
-
-              <div class = "col-xl-6">
-              <% if member_signed_in? %>
-                <nav class="nav1 member-after-login navbar-custom">
-                      <ul class="nav navbar-nav navbar-right">
-                        <li><%= link_to 'マイページ', member_path(current_member) %></li>
-                        <li><%= link_to '作品一覧', works_path %></li>
-                        <li><%= link_to 'いいね作品一覧', member_work_path(id: current_member.id,member_id: current_member.id)%></li>
-                        <li><%= link_to '新規投稿', new_member_work_path(current_member) %></li>
-                        <li><%= link_to 'ログアウト', destroy_member_session_path, method: :delete  %></li>
-                      </ul>
-                </nav>
-                <% elsif admin_user_signed_in? %>
-                <nav class="nav1 member-after-login navbar-custom">
-                      <ul class="nav navbar-nav navbar-right">
-                        <li><%= link_to '管理者ホーム', admin_dashboard_path %></li>
-                        <li><%= link_to 'ジャンル一覧', admin_genres_path %></li>
-                        <li><%= link_to '登録者一覧', root_path %></li>
-                      </ul>
-                </nav>
-              <% else %>
-                <nav class="nav1 member-before-login navbar-custom">
-                  <ul class="nav navbar-nav navbar-right">
-                    <li><%= link_to 'About', works_about_path %></li>
-                    <li><%= link_to '作品一覧', works_path %></li>
-                    <li><%= link_to '新規登録', new_member_registration_path %></li>
-                    <li><%= link_to 'ログイン', new_member_session_path %></li>
-                  </ul>
-                </nav>
-              <% end %>
-              </div>
             </div>
+    </header>
+
+      <div class="main">
+        <div class='container'>
+          <%= yield %>
         </div>
-</header>
-
-<div class="main">
-  <div class='container'>
-    <%= yield %>
-  </div>
-</div>
-
-    <footer>
-</footer>
+      </div>
   </body>
 </html>

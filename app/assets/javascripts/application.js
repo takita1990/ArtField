@@ -16,3 +16,15 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(document).on('turbolinks:load', function() {
+	$(function(){
+	  $('.single-item').slick({
+	    accessibility: true,
+	    autoplay: true,
+	    autoplaySpeed: 1000,
+	    dots: true,
+	    fade: true,
+	  });
+	});
+});

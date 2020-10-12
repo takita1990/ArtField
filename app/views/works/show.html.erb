@@ -1,114 +1,126 @@
- <div class="row">
-  <div class= "col-xs-10">
-    <h3>商品詳細</h3>
-      <table class="table">
-        <tr>
-           <th>作品画像</th>
-              <% if @work.image.present? %>
-                <% @work.image.each do |img| %>
-              <td><%= image_tag(img.url) %></td>
-                <% end %>
-            <% end %>
-        </tr>
-        <tr>
-          <th>商品名</th>
-          <td><%= @work.name %></td>
-        </tr>
-        <tr>
-          <th>商品説明</th>
-          <td><%= @work.introduction %></td>
-        </tr>
-        <tr>
-          <th>ジャンル</th>
-          <td><%= @work.genre.name %></td>
-        </tr>
-      </table>
-      <% if member_signed_in? %>
-        <% if @work.member_id == current_member.id %>
-          <div class="field">
-            <%= link_to "編集する", edit_member_work_path(@work.id),class:"btn btn-primary" %>
+   <div class="row">
+      <div class= "col-xs-10">
+         <h3>商品詳細</h3>
 
-            <%= link_to "削除する", member_work_path(@work.id), method: :delete, "data-confirm" => "本当に消しますか?", class: "btn btn-danger" %>
-          </div>
-        <% end %>
-      <% end %>
+        <table class="table">
+           <tr>
+                <th>作品画像</th>
+                 <% if @work.image.present? %>
+                     <div class="image">
+                       <% @work.image.each do |img| %>
+                         <div class="one image"><%= image_tag(img.url) %></div>
+                       <% end %>
+                     </div>
+                 <% end %>
+           </tr>
+           <tr>
+               <th>商品名</th>
+                 <td><%= @work.name %></td>
+           </tr>
+           <tr>
+               <th>商品説明</th>
+                 <td><%= @work.introduction %></td>
+           </tr>
+           <tr>
+               <th>ジャンル</th>
+                 <td><%= @work.genre.name %></td>
+           </tr>
+       </table>
 
-<% if member_signed_in? %>
-   <% if @work.member_id != current_member.id %>
-         <div class="comment-list bt style-2" id="comments">
-                <div class="float-wrapper">
-                  <h2 class="comment-count"><%= @work.post_comments.count %>件コメント</h2>
-                </div>
+         <% if member_signed_in? %>
+           <% if @work.member_id == current_member.id %>
+             <div class="field">
+               <%= link_to "編集する", edit_member_work_path(current_member),class:"btn btn-primary" %>
 
-            <%= form_for [@work, @post_comment] do |f| %>
-                <div class="row">
-                  <div class="col-sm-12">
-                    <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
-                  </div>
-                </div>
-                    <%= f.submit "コメント", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
-            <% end %>
-
-            <ol>
-               <% @work.post_comments.each do |post_comment| %>
-                  <li class="comment">
-                    <div class="comment-body bb">
-                      <div class="comment-avatar">
-                        <div class="avatar">
-                          <%= attachment_image_tag current_member, :profile_image, :fill, 50, 50, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
-                        </div>
-                      </div>
-                      <div class="comment-text">
-                        <div class="comment-author clearfix">
-                          <a href="#" class="link-author"><%= post_comment.member.name %></a>
-                          <span class="comment-meta">
-                            <span class="comment-date"><%= post_comment.created_at.strftime('%Y/%m/%d') %>
-                            </span>
-                          </span>
-                        </div>
-                        <div class="comment-entry"><%= post_comment.comment %></div>
-                        <% if post_comment.member == current_member %>
-                          <div>
-                            <%= link_to "削除", work_post_comment_path(post_comment.work, post_comment), method: :delete, class: "btn btn-danger pull-right" %>
-                          </div>
-                        <% end %>
-                      </div>
-                    </div>
-                  </li>
-               <% end %>
-            </ol>
-         </div>
+               <%= link_to "削除する", member_work_path(@work.id), method: :delete, "data-confirm" => "本当に消しますか?", class: "btn btn-danger" %>
+             </div>
+           <% end %>
+         <% end %>
       </div>
-   <% else %>
-      <div class="comment-list bt style-2" id="comments">
-                   <div class="float-wrapper">
-                     <h2 class="comment-count"><%= @work.post_comments.count %>件コメント</h2>
+   </div>
+
+
+
+   <% if member_signed_in? %>
+      <% if @work.member_id != current_member.id %>
+            <div class="comment-list bt style-2" id="comments">
+               <div class="float-wrapper">
+                 <h2 class="comment-count"><%= @work.post_comments.count %>件コメント</h2>
+               </div>
+
+               <%= form_for [@work, @post_comment] do |f| %>
+                   <div class="row">
+                     <div class="col-sm-12">
+                       <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+                     </div>
                    </div>
+                       <%= f.submit "コメント", class: "btn btn-lg btn-base-1 btn-primary" %>
+               <% end %>
+
                <ol>
                   <% @work.post_comments.each do |post_comment| %>
                      <li class="comment">
                        <div class="comment-body bb">
                          <div class="comment-avatar">
                            <div class="avatar">
-                             <%= attachment_image_tag current_member, :profile_image, :fill, 50, 50, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+                             <%= attachment_image_tag post_comment.member, :profile_image, :fill, 50, 50, format: 'jpeg', class: "img-circle pull-left profile-image", fallback: "no_image.jpg" %>
                            </div>
                          </div>
                          <div class="comment-text">
                            <div class="comment-author clearfix">
-                             <a href="#" class="link-author"><%= post_comment.member.name %></a>
+                             <div class="link-author"><%= link_to member_path(post_comment.member.id) do %>
+                               <%= post_comment.member.name %>
+                             <% end %>
+                             </div>
                              <span class="comment-meta">
                                <span class="comment-date"><%= post_comment.created_at.strftime('%Y/%m/%d') %>
                                </span>
                              </span>
                            </div>
                            <div class="comment-entry"><%= post_comment.comment %></div>
+                           <% if post_comment.member == current_member %>
+                             <div class ="destroy-btm">
+                               <%= link_to "削除", work_post_comment_path(post_comment.work, post_comment), method: :delete, class: "btn btn-danger pull-right" %>
+                             </div>
                            <% end %>
                          </div>
                        </div>
                      </li>
                   <% end %>
                </ol>
-      </div>
-<% end %>
+            </div>
+      <% else %>
+         <div class="comment-list bt style-2" id="comments">
+            <div class="float-wrapper">
+              <h2 class="comment-count"><%= @work.post_comments.count %>件コメント</h2>
+            </div>
+              <ol>
+                 <% @work.post_comments.each do |post_comment| %>
+                    <li class="comment">
+                       <div class="comment-body bb">
+                          <div class="comment-avatar">
+                            <div class="avatar">
+                              <%= attachment_image_tag post_comment.member, :profile_image, :fill, 50, 50, format: 'jpeg', class: "img-circle pull-left profile-image", fallback: "no_image.jpg" %>
+                            </div>
+                          </div>
+                          <div class="comment-text">
+                            <div class="comment-author clearfix">
+                              <a href="#" class="link-author"><%= post_comment.member.name %></a>
+                              <span class="comment-meta">
+                                <span class="comment-date"><%= post_comment.created_at.strftime('%Y/%m/%d') %>
+                                </span>
+                              </span>
+                            </div>
+                            <div class="comment-entry">
+                             <%= post_comment.comment %>
+                            </div>
+                          </div>
+                       </div>
+                    </li>
+                 <% end %>
+              </ol>
+         </div>
+       <% end %>
+   <% end %>
 
 

@@ -2,6 +2,51 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-img{
-	margin-bottom: 20px;
+section{
+  clear:both;
+  padding-top: 70px;
+}
+
+section h2{
+  font-family: 'Pacifico', cursive;
+  width: 60%;
+  margin: 0 auto 40px;
+  font-size: 22px;
+  font-weight:normal;
+  text-align: center;
+  background: url(../images/borderBlack.png) repeat-x 0 50%;
+  background-size: 1px 1px;
+}
+
+section h2 span {
+  background: #d7d7d7;
+  padding: 0 80px;
+}
+
+.innerS{
+  width: 60%;
+  margin: 0 auto;
+  padding-bottom: 80px;
+}
+
+#sec01{
+  text-align: center;
+}
+
+body{
+  background: image-url('white_00025.jpg')
+}
+
+
+.single-item{
+  margin: 50px;
+}
+
+.c{
+  height: 500px;
+  width :100%;
+}
+
+.profile-img{
+  margin: 20px auto;
 }

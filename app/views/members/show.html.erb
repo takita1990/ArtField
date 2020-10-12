@@ -1,50 +1,59 @@
-  <div class ="row">
-   <div class="col-xs-6">
-    <% if current_member == @member %>
-        <h1>マイページ</h1>
-    <% else %>
-        <h1><%= @member.name %>さんのマイページ</h1>
-    <% end %>
+   <div class ="row">
+      <div class="col-xs-6">
+         <% if current_member == @member %>
+               <h1>マイページ</h1>
+         <% else %>
+               <h1><%= @member.name %>さんのマイページ</h1>
+         <% end %>
 
-    <% if current_member == @member %>
-       <font size= "4" >登録情報 </font>
-       <%= link_to "編集する", edit_member_path(@member), class: "btn btn-primary"%>
-       <%= link_to "出展作品一覧", member_works_path(@member), class: "btn btn-success"%>
-       <%= link_to "フォロー一覧", follows_member_path(@member), class: "btn btn-warning"%>
-       <%= link_to "フォロワー一覧", followers_member_path(@member), class: "btn btn-warning"%>
-      <% end %>
-    </div>
-  </div>
-
-  <div class ="row">
-   <div class="col-xs-2">
-        <table class="table table-bordered ">
-          <tr>
-          	 <%= attachment_image_tag @member, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
-            <th class="active">氏名</th>
-            <td><%= @member.name %></td>
-          </tr>
-      </table>
-  </div>
-  </div>
-  <div class ="row">
-   <div class="col-xs-10">
-   	<table>
-        <tr>
-            <th class="active">自己紹介</th>
-        </tr>
-        <tr>
-        	<%= form_for(@member) do |f|%>
-            <td><%= f.text_area :introduction%></td>
-            <% end %>
-        </tr>
-        <tr>
-        <td>
-          <div id = "relationships_buttons_<%= @member.id%>">
-                <%= render partial: "relationships/follow_relationship", locals: {member: @member} %>
-          </div>
-        </td>
-      </tr>
-      </table>
+         <% if current_member == @member %>
+            <font size= "4" >登録情報 </font>
+              <%= link_to "編集する", edit_member_path(@member), class: "btn btn-primary"%>
+              <%= link_to "出展作品一覧", member_works_path(@member), class: "btn btn-success"%>
+              <%= link_to "フォロー一覧", follows_member_path(@member), class: "btn btn-warning"%>
+              <%= link_to "フォロワー一覧", followers_member_path(@member), class: "btn btn-warning"%>
+         <% else %>
+              <%= link_to "出展作品一覧", member_works_path(@member), class: "btn btn-success"%>
+         <% end %>
+     </div>
    </div>
-  </div>
+
+
+
+   <div class ="row">
+      <div class="col-xs-2">
+            <div class= "profile-image">
+              <%= attachment_image_tag @member, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+            </div>
+         <table class="table table-bordered">
+            <tr>
+               <th class="active">氏名</th>
+               <td><%= @member.name %></td>
+            </tr>
+         </table>
+      </div>
+   </div>
+
+
+
+   <div class ="row">
+      <div class="col-xs-10">
+         <table>
+               <tr>
+                     <th class="active">自己紹介</th>
+               </tr>
+               <tr>
+                  <%= form_for(@member) do |f|%>
+                     <td><%= f.text_area :introduction%></td>
+                  <% end %>
+               </tr>
+               <tr>
+                  <td>
+                     <div id = "relationships_buttons_<%= @member.id%>">
+                       <%= render partial: "relationships/follow_relationship", locals: {member: @member} %>
+                     </div>
+                  </td>
+               </tr>
+         </table>
+      </div>
+   </div>

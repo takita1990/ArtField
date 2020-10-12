@@ -1,5 +1,6 @@
 class MembersController < ApplicationController
   before_action :authenticate_member!
+  before_action :correct_member, only: [:edit,:followers,:follows]
   def show
   	@member = Member.find(params[:id])
   end
@@ -27,9 +28,23 @@ class MembersController < ApplicationController
     @followers_member = member.followers
   end
 
+  def destroy
+    member = current_member
+    if member.destroy
+      redirect_to root_path
+    end
+  end
+
   private
   def member_params
   	params.require(:member).permit(:name, :email, :profile_image, :introduction)
+  end
+
+    def correct_member
+    @member = Member.find(params[:id])
+    if @member != current_member
+      redirect_to root_path
+    end
   end
 
 end

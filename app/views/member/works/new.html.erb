@@ -1,18 +1,21 @@
-<div class="row">
-		<h1>商品新規登録</h1>
+	<div class="row">
+			<h1>商品新規登録</h1>
 	</div>
+
+
 	<div class="row">
 		<%= form_for(@work, url: member_works_path) do |f| %>
 				<!-- エラーメッセージ表示-->
-					<% if @work.errors.any? %>
-						<div id="error_explanation">
-							<h3><%= @work.errors.count %>error prohibited this obj from being saved:</h3>
-								<% @work.errors.full_messages.each do |message| %>
-									<%= message %>
-								<% end %>
-						</div>
-					<% end %>
+			<% if @work.errors.any? %>
+				<div id="error_explanation">
+					<h3><%= @work.errors.count %>error prohibited this obj from being saved:</h3>
+						<% @work.errors.full_messages.each do |message| %>
+							<%= message %>
+						<% end %>
+				</div>
+			<% end %>
 				<!-- エラーメッセージ表示-->
+
 
 			<table class="table">
 				<%= f.label :image %>
@@ -28,7 +31,7 @@
 				</tr>
 				<tr>
 					<th>ジャンル</th>
-					<td><%= f.collection_select :genre_id, Genre.all, :id, :name%></td>
+					<td><%= f.collection_select :genre_id, Genre.only_valid_status, :id, :name%></td>
 				</tr>
 			</table>
 			<div class="row justify-content-end">

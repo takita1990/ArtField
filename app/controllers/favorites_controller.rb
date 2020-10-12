@@ -1,4 +1,6 @@
 class FavoritesController < ApplicationController
+
+  before_action :authenticate_member!
   def create
     @work = Work.find(params[:work_id])
   	favorite = current_member.favorites.build(work_id: params[:work_id], member_id: current_member.id)
