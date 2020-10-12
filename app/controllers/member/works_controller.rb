@@ -1,5 +1,6 @@
 class Member::WorksController < ApplicationController
   before_action :authenticate_member!,except: [:top, :about]
+  before_action :correct_work, only: [:edit]
 
   def top
   end
@@ -55,6 +56,13 @@ class Member::WorksController < ApplicationController
   private
   def work_params
     params.require(:work).permit(:name, :introduction, :genre_id, {image: []}, :member_id)
+  end
+
+  def correct_work
+    @work = Work.find(params[:id])
+    if @work.member != current_member
+      redirect_to root_path
+    end
   end
 
 
