@@ -3,14 +3,13 @@
 
    <%= form_for(@work, url: member_work_path) do |f| %>
       <table class="table">
-          <% if @work.image.present? %>
-            <div class="image">
-                   <% @work.image.each do |img| %>
-                     <div class = "one-image"><%= image_tag(img.url) %></div>
-                   <% end %>
-            </div>
-         <% end %>
-
+                   <div class="image">
+                      <% @work.image[0].identifier.gsub("\"", "").gsub("[","").gsub("]","").gsub(" ","").split(",").each do |img| %>
+                      <% baseuri = "/uploads/work/image/"+ @work.id.to_s + "/" %>
+                      <% uri = baseuri + img %>
+                         <div class="one image"><%= image_tag uri %></div>
+                     <% end %>
+                   </div>
           <%= f.label :image %>
           <%= f.file_field :image, multiple: true %>
           <tr>
@@ -26,7 +25,6 @@
                <td><%= f.collection_select :genre_id, Genre.all, :id, :name%></td>
           </tr>
       </table>
-
           <%= f.submit '変更を保存する', class: "btn btn-primary"%>
    <% end %>
 </div>

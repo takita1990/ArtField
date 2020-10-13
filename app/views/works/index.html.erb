@@ -24,9 +24,8 @@
      <% if @search_genre.present? %>
         <% @search_genre.first.works.each do |work| %>
              <li>
-                 <% if work.image.present? %>
-                       <div class="image"><%= image_tag(work.image[0].url) %></div>
-                 <% end %>
+                 <% baseuri = "/uploads/work/image/"+ work.id.to_s + "/" + work.image[0].identifier.gsub("\"", "").gsub("[","").gsub("]","").gsub(" ","").split(",")[0] %>
+                 <div class="image"><%= image_tag baseuri %></div>
                  <div class = "work_name">作品名：<%= link_to work.name, work_path(work.id) %></div>
                  <div class = "member_name">出展者：<%= link_to work.member.name, member_path(work.member_id) %></div>
                  <div class="inline-meta">
@@ -41,17 +40,16 @@
      <% else %>
         <% @works.each do |work| %>
               <li>
-                 <% if work.image.present? %>
-                       <div class="image"><%= image_tag(work.image.first.url) %></div>
-                 <% end %>
-                     <div class = "work_name">作品名：<%= link_to work.name, work_path(work.id) %></div>
-                     <div class = "member_name">出展者：<%= link_to work.member.name, member_path(work.member_id) %></div>
-                     <div class="inline-meta">
-                     <%= link_to work.post_comments.count, work_path(work.id), class:"fa fa-comment"  %>
-                     <span id="favorites_buttons_<%= work.id %>">
-                         <%= render partial: 'favorites/favorite', locals: { work: work} %>
-                     </span>
-                </div>
+                   <% baseuri = "/uploads/work/image/"+ work.id.to_s + "/" + work.image[0].identifier.gsub("\"", "").gsub("[","").gsub("]","").gsub(" ","").split(",")[0] %>
+                   <div class="image"><%= image_tag baseuri %></div>
+                   <div class = "work_name">作品名：<%= link_to work.name, work_path(work.id) %></div>
+                   <div class = "member_name">出展者：<%= link_to work.member.name, member_path(work.member_id) %></div>
+                   <div class="inline-meta">
+                       <%= link_to work.post_comments.count, work_path(work.id), class:"fa fa-comment"  %>
+                       <span id="favorites_buttons_<%= work.id %>">
+                           <%= render partial: 'favorites/favorite', locals: { work: work} %>
+                       </span>
+                   </div>
               </li>
         <% end %>
      <% end %>

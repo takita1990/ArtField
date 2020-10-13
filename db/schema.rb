@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 2020_10_09_114151) do
     t.integer "member_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.json "image"
+    t.string "image"
   end
 
 end

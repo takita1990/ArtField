@@ -5,13 +5,13 @@
         <table class="table">
            <tr>
                 <th>作品画像</th>
-                 <% if @work.image.present? %>
-                     <div class="image">
-                       <% @work.image.each do |img| %>
-                         <div class="one image"><%= image_tag(img.url) %></div>
+                    <div class="image">
+                        <% @work.image[0].identifier.gsub("\"", "").gsub("[","").gsub("]","").gsub(" ","").split(",").each do |img| %>
+                        <% baseuri = "/uploads/work/image/"+ @work.id.to_s + "/" %>
+                        <% uri = baseuri + img %>
+                           <div class="one image"><%= image_tag uri %></div>
                        <% end %>
-                     </div>
-                 <% end %>
+                    </div>
            </tr>
            <tr>
                <th>商品名</th>

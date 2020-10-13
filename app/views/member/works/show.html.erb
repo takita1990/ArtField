@@ -3,11 +3,8 @@
   <ul class="box-list">
     <% @favorite_works.each do |work| %>
       <li>
-          <% if work.image.present? %>
-            <% work.image.find(1).each do |img| %>
-              <div class="image"><%= image_tag(img.url) %></div>
-            <% end %>
-          <% end %>
+              <% baseuri = "/uploads/work/image/"+ work.id.to_s + "/" + work.image[0].identifier.gsub("\"", "").gsub("[","").gsub("]","").gsub(" ","").split(",")[0] %>
+              <div class="image"><%= image_tag baseuri %></div>
               <div class = "work_name">作品名：<%= link_to work.name, work_path(work.id) %>
               </div>
               <div class = "member_name">出展者：<%= link_to work.member.name, member_path(work.member_id) %>
