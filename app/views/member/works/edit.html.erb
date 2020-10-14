@@ -3,13 +3,18 @@
 
    <%= form_for(@work, url: member_work_path) do |f| %>
       <table class="table">
-                   <div class="image">
-                      <% @work.image[0].identifier.gsub("\"", "").gsub("[","").gsub("]","").gsub(" ","").split(",").each do |img| %>
-                      <% baseuri = "/uploads/work/image/"+ @work.id.to_s + "/" %>
-                      <% uri = baseuri + img %>
-                         <div class="one image"><%= image_tag uri %></div>
-                     <% end %>
-                   </div>
+                  <div class="image">
+                      <% if Rails.env.production? == true %>
+                        <% images = @work.image.map(&:identifier) %>
+                      <% else %>
+                        <% images = @work.image[0].identifier.gsub("\"", "").gsub("[","").gsub("]","").gsub(" ","").split(",") %>
+                      <% end %>
+                        <% images.each do |img| %>
+                        <% baseuri = "/uploads/work/image/"+ @work.id.to_s + "/" %>
+                        <% uri = baseuri + img %>
+                             <div class="one image"><%= image_tag uri %></div>
+                        <% end %>
+                  </div>
           <%= f.label :image %>
           <%= f.file_field :image, multiple: true %>
           <tr>
