@@ -7,7 +7,7 @@
                 <th>作品画像</th>
                     <div class="image">
                       <% if Rails.env.production? == true %>
-                        <% images = @work.image　%>
+                        <% images = @work.image %>
                       <% else %>
                         <% images = @work.image[0].identifier.gsub("\"", "").gsub("[","").gsub("]","").gsub(" ","").split(",") %>
                       <% end %>
