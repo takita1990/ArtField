@@ -3,7 +3,7 @@ class PostCommentsController < ApplicationController
   def create
 	work = Work.find(params[:work_id])
     comment = PostComment.new(post_comment_params)
-	comment.member_id = current_member.id
+	  comment.member_id = current_member.id
     comment.work_id = work.id
     comment.save
     redirect_to work_path(work)

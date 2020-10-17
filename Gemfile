@@ -79,4 +79,5 @@ gem "refile-mini_magick"
 gem "carrierwave"
 gem "pry-byebug"
 gem 'mini_magick'
+gem 'dotenv-rails'
 

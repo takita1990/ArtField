@@ -7,6 +7,7 @@ class Work < ApplicationRecord
 
 	has_many :favorites, dependent: :destroy
 	has_many :post_comments, dependent: :destroy
+	has_many :tags,dependent: :destroy
 
 	scope :where_genre_active, -> { joins(:genre).where(genres: { is_active: true }) }
 
