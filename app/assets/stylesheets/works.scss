@@ -65,6 +65,7 @@
   flex-wrap: wrap;
   flex-direction:row;
   align-content:stretch;
+
 }
 
 .image div{
@@ -72,6 +73,7 @@
   margin-bottom: 1px;
   text-align:  center;
   width: 200px;
+  text-align: center;
   }
 
 
@@ -197,4 +199,20 @@
   font-size: 14px;
   color: #ffffff;
   font-weight: 600;
+}
+
+.label-box {
+  background-color: #337ab7;
+  font-weight: 500;
+  display: inline;
+  padding: 3px;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+  margin: 2px auto;
 }

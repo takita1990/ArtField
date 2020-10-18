@@ -21,10 +21,12 @@ class Member::WorksController < ApplicationController
     @work = Work.new(work_params)
     @work.member_id = current_member.id
     if @work.save
-    tags = Vision.get_image_data(@work.image)
-    tags.each do |tag|
-    @work.tags.create(name: tag)
-    end
+        @work.image.each do |img|
+          tags = Vision.get_image_data(img, @work.id)
+          tags.each do |tag|
+            @work.tags.create(name: tag, filename: img.filename)
+          end
+        end
       redirect_to member_works_path
     else
       render :new

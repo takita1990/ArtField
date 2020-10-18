@@ -31,7 +31,6 @@ class Admin::MembersController < ApplicationController
     reset_session
     #sessionIDのresetを行う
     redirect_to admin_members_path
-    #指定されたrootへのpath
   end
 
   private

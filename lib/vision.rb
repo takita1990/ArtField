@@ -4,12 +4,13 @@ require 'net/https'
 
 module Vision
   class << self
-    def get_image_data(image_file)
+    def get_image_data(image_file, work_id)
       # APIのURL作成
       api_url = "https://vision.googleapis.com/v1/images:annotate?key=#{ENV['GOOGLE_API_KEY']}"
 
       # 画像をbase64にエンコード
-      base64_image = Base64.encode64(open("#{Rails.root}/public/uploads/work/image/#{image_file.first.model.id}/#{image_file.first.filename}").read)
+      base64_image = Base64.encode64(open("#{Rails.root}/public/uploads/work/image/#{work_id}/#{image_file.filename}").read)
+      #base64_image = Base64.encode64(open("#{Rails.root}/public/uploads/#{image_file.id}").read)
 
       # APIリクエスト用のJSONパラメータ
       params = {
