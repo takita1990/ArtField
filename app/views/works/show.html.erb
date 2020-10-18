@@ -4,28 +4,25 @@
 
         <table class="table">
            <tr>
-                <th>作品画像</th>
-                    <div class="image">
-                        <% if Rails.env.production? == true %>
-                          <% images = @work.image.map(&:identifier) %>
-                        <% else %>
-                          <% images = @work.image[0].identifier.gsub("\"", "").gsub("[","").gsub("]","").gsub(" ","").split(",") %>
-                        <% end %>
+              <th>作品画像</th>
+              <% images = @work.image.map(&:identifier) %>
 
-                        <% images.each do |img| %>
-                            <% baseuri = "/uploads/work/image/"+ @work.id.to_s + "/" %>
-                            <% uri = baseuri + img %>
-                            <div class="one image">
-                                <%= image_tag uri %>
-                              <!-- img がfilename -->
-                               <% @work.tags.each do |tag| %>
-                                  <% if tag.filename == img %>
-                                    <span class="label-box"><%= tag.name %></span>
-                                  <% end %>
-                               <% end %>
-                            </div>
+              <div class="image">
+                <% images.each do |img| %>
+                  <% baseuri = "/uploads/work/image/"+ @work.id.to_s + "/" %>
+                  <% eval(img).each do |im| %>
+                    <% uri = baseuri + im %>
+                    <div class="one image">
+                      <%= image_tag uri %>
+                        <% @work.tags.each do |tag| %>
+                          <% if tag.filename == im %>
+                              <span class="label-box"><%= tag.name %></span>
+                          <% end %>
                         <% end %>
                     </div>
+                  <% end %>
+                <% end %>
+              </div>
            </tr>
            <tr>
                <th>商品名</th>
