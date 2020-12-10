@@ -10,9 +10,24 @@
     <% end %>
   </ul>
 
-    <tr>
-      <td><%= link_to "すべての商品を見る", works_path, class: 'dark-blue-letter' %></td>
-    </tr>
+  <tr>
+    <td><%= link_to "すべての商品を見る", works_path, class: 'dark-blue-letter' %></td>
+  </tr>
+
+<h3 class ="rank">いいねランキング</h3>
+  <ul class="box-list">
+   <% @all_ranks.each.with_index(1) do |work, i| %>
+     <li>
+       <h4><%= i %>位</h4>
+       <% baseuri = "/uploads/work/image/"+ work.id.to_s + "/" + work.image[0].identifier.gsub("\"", "").gsub("[","").gsub("]","").gsub(" ","").split(",")[0] %>
+         <div class="image"><%= image_tag baseuri %></div>
+         <div class = "work_name">作品名：<%= link_to work.name, work_path(work.id) %></div>
+         <div class = "member_name">出展者：<%= link_to work.member.name, member_path(work.member_id) %></div>
+     </li>
+   <% end %>
+  </ul>
+
+
 
 <h3>
 	<% if member_signed_in? %>

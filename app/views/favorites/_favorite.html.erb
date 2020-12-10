@@ -1,11 +1,9 @@
-	<% if member_signed_in? %>
-		<% if current_member != work.member %>
+	<% if current_member != work.member %>
 	        <% if work.favorite_by?(current_member) %>
 	            <%=link_to work.favorites.count, work_favorites_path(work), method: :delete,remote: true, class: "fa fa-heart",aria: {hidden: true}, style:"color: red;"%>
 	        <% else %>
 	            <%=link_to work.favorites.count, work_favorites_path(work), method: :post,remote: true, class: "far fa-heart",aria: {hidden: true}%>
 	        <% end %>
-	    <% end %>
 	<% else %>
 		<div class="fa fa-heart" aria-hidden="true" style="color: red;"><%= work.favorites.count %></div>
 	<% end %>
